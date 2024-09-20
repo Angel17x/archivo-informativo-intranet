@@ -1,6 +1,6 @@
 @import './variables';
 
-$small: 768px;
+$small: 1024px;
 
 @mixin small {
   @media (min-width: $small) {
