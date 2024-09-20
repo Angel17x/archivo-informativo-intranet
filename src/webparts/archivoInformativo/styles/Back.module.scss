@@ -1,0 +1,45 @@
+@import './variables';
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 1rem;
+
+  .button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: auto;
+    margin-bottom: 1rem;
+
+    span {
+      font-size: 18px;
+      margin-right: 10px;
+      cursor: pointer;
+      color: var(--themePrimary);
+      margin-left: 10px;
+    }
+  }
+
+  .breadcrumb {
+    margin-bottom: 0.8rem;
+  }
+
+  .categoryTitle {
+    font-size: 32px;
+    color: #666666;
+    margin: 0;
+    margin-bottom: 0.4rem;
+  }
+
+  .count {
+    font-size: 14px;
+    margin-bottom: 0.5em;
+    color: #A1A1A1;
+    background-color: transparent;
+    font-weight: 700;
+  }
+}

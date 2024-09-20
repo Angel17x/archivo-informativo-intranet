@@ -1,0 +1,35 @@
+@import './variables';
+
+$small: 768px;
+
+@mixin small {
+  @media (min-width: $small) {
+    @content;
+  }
+}
+
+.container {
+  width: 100%;
+  margin: 20px 0px;
+
+  @include small {
+    display: none !important;
+  }
+}
+
+.buttonFilter {
+  display: flex;
+  flex-direction: row;
+  gap: 20;
+  cursor: pointer;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+
+  span {
+    font-size: 16px;
+    color: var(--themePrimary);
+    font-weight: 400;
+    margin-left: 10px;
+  }
+}

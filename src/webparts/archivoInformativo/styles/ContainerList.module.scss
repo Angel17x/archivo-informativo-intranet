@@ -1,0 +1,45 @@
+@import './variables';
+
+$small: 768px;
+
+@mixin small {
+  @media (max-width: $small) {
+    @content;
+  }
+}
+
+.containerRoot {
+
+  .containerHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      color: var(--themePrimary);
+      font-size: 32px;
+    }
+  }
+
+  .containerBody {
+    width: 100%;
+    display: grid;
+    grid:
+      "sidebar body" 1fr / 2fr 10fr;
+    gap: 8px 10px;
+
+    @include small {
+      grid-template-columns: 1fr;
+      gap: 0px;
+    }
+
+    .sidebar {
+      grid-area: sidebar;
+    }
+
+    .body {
+      grid-area: body;
+    }
+  }
+
+}

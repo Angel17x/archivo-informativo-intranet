@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "archivo-informativo-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/archivoInformativo/ArchivoInformativoWebPart.js",
+          "manifest": "./src/webparts/archivoInformativo/ArchivoInformativoWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ArchivoInformativoWebPartStrings": "lib/webparts/archivoInformativo/loc/{locale}.js"
+  }
+}

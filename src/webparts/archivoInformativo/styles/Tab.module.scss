@@ -1,0 +1,52 @@
+@import './variables';
+
+$small: 768px;
+
+@mixin small {
+  @media (max-width: $small) {
+    @content;
+  }
+}
+
+.tabContainer {
+  @include small {
+    display: none !important;
+  }
+
+  margin-bottom: 20px;
+
+  [aria-selected="true"] {
+    font-weight: bold;
+
+    >span {
+      color: var(--themePrimary) !important;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  .tabItem {
+    padding-left: 1rem;
+    font-size: 16px;
+    background-color: transparent;
+    font-size: 16px;
+
+    span {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+
+    &::after {
+      background-color: var(--themeOrange) !important;
+      font-weight: bold !important;
+      margin-inline-start: -4px;
+      width: 90%;
+    }
+
+    &::before {
+      margin-inline-start: -5px;
+      width: 90%;
+    }
+  }
+}

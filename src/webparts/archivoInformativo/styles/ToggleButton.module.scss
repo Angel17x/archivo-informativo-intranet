@@ -1,0 +1,48 @@
+@import './variables';
+
+.toggleButton button {
+  background: var(--neutralLight) !important;
+  border: 2px solid transparent !important;
+  border-radius: 8px;
+  margin: 5px;
+  padding: 8px, 12px, 8px, 12px;
+}
+
+.toggleButton [aria-pressed='true'] {
+  background: white !important;
+  border: 2px solid var(--themeDark) !important;
+  color: var(--themePrimary) !important;
+  border-radius: 8px;
+  margin: 5px;
+  padding: 8px, 12px, 8px, 12px;
+}
+
+.toggleButtonFullWidth button {
+  display: flex;
+  justify-content: flex-start;
+  text-align: start !important;
+  background: white !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 16px;
+  width: 100%;
+}
+
+.toggleButtonFullWidth [aria-pressed='true'] {
+  background: var(--neutralLight) !important;
+  border: none !important;
+  color: var(--themePrimary) !important;
+  margin: 0 !important;
+  width: 100%;
+}
+
+.primaryDarkButton {
+  background: linear-gradient(180deg, rgba(0, 159, 218, 1) 10%, rgba(0, 78, 155, 1) 100%);
+  color: white !important;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 9px;
+  font-size: 16px;
+  cursor: pointer;
+}

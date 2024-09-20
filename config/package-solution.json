@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "archivoinformativo-client-side-solution",
+    "id": "815934be-4ede-4ae9-8539-abe83fbd8ea4",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.19.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "archivoinformativo description"
+      },
+      "longDescription": {
+        "default": "archivoinformativo description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "archivoinformativo Feature",
+        "description": "The feature that activates elements of the archivoinformativo solution.",
+        "id": "03de79ce-54b5-4c0b-8005-fc572ed5003a",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/archivoinformativo.sppkg"
+  }
+}

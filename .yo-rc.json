@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "20.17.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.19.0",
+    "libraryName": "archivoinformativo",
+    "libraryId": "815934be-4ede-4ae9-8539-abe83fbd8ea4",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "archivoinformativo",
+    "solutionShortDescription": "archivoinformativo description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
