@@ -1,24 +1,31 @@
-import { Card, CardPreview } from "@fluentui/react-components";
+import { Card, CardFooter, CardPreview } from "@fluentui/react-components";
 import * as React from "react";
 import styles from '../../styles/Card.module.scss';
 import { ICardItem } from "../../interfaces/ICardItem";
 import { MediaDisplay } from "../media/MediaDisplay";
 
-export const CardComponent: React.FC<ICardItem> = ({ id, imageUrl, title, description, timestamp }: ICardItem) => {
+export const CardComponent: React.FC<ICardItem> = ({ id, imageUrl, title, description, timestamp, fileUrl, tags }: ICardItem) => {
   return (
-    <Card key={id} className={styles.cardContainer}>
-      <CardPreview className={styles.containerImage}>
-        <MediaDisplay url={imageUrl} width='80' height="80" />
-      </CardPreview>
-      <div className={styles.containerBody}>
-        <h2>{title}</h2>
-        <div className={styles.dateContainer}>
-          <p>{timestamp}</p>
+    <a href={fileUrl} target="_blank" rel="noreferrer">
+      <Card key={id} className={styles.cardContainer}>
+        <CardPreview className={styles.containerImage}>
+          <MediaDisplay url={imageUrl} width={80} height={80} />
+        </CardPreview>
+        <div className={styles.containerBody}>
+          <h2>{title}</h2>
+          <div className={styles.dateContainer}>
+            <p>{timestamp}</p>
+          </div>
+          <p>
+            {description}
+          </p>
         </div>
-        <p>
-          {description}
-        </p>
-      </div>
-    </Card>
+        <CardFooter className={styles.containerFooter}>
+          {tags.length > 0 && tags.map((tag, index) => {
+            return <button key={`${tag}_${index}`}>{tag.Title}</button>;
+          })}
+        </CardFooter>
+      </Card>
+    </a>
   );
 }

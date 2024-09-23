@@ -12,7 +12,7 @@ export const Posts: React.FC<{ isLoading: boolean, items: IItem[] }> = ({ isLoad
   });
 
   React.useEffect(() => {
-    console.log('estado de los posts', { isLoading: isLoading, items: items });
+    // console.log('estado de los posts', { isLoading: isLoading, items: items });
     if (isLoading) {
       setState((oldState) => {
         return { ...oldState, items: items };
@@ -37,19 +37,26 @@ export const Posts: React.FC<{ isLoading: boolean, items: IItem[] }> = ({ isLoad
           </Skeleton>
           :
           !state.isLoading && items.length !== 0 ?
-            items.length > 0 && items.map((item: IItem, index: number) => <CardComponent
-              id={`card-${index}`}
-              key={index}
-              imageUrl={
-                item.BannerImageUrl.Url === null ||
-                  item.BannerImageUrl.Url === undefined ?
-                  require('../../assets/no-items.png') :
-                  item.BannerImageUrl.Url
-              }
-              title={item.Title ?? ""}
-              description={item.Description ?? ""}
-              timestamp={new Date(item.Created).toLocaleDateString()}
-            />)
+            items.length > 0 && items.map((item: IItem, index: number) => {
+              let categories = item.Categoria.length > 0 ? item.Categoria.map((x) => x.Title).join(' - ') : '';
+              let tags = item.Etiquetas.length > 0 ? item.Etiquetas.map((x) => x.Title).join(' - ') : '';
+              return (<CardComponent
+                id={`card-${index}`}
+                fileUrl={item.FileRef}
+                key={index}
+                imageUrl={
+                  item.BannerImageUrl.Url === null ||
+                    item.BannerImageUrl.Url === undefined ?
+                    require('../../assets/no-items.png') :
+                    item.BannerImageUrl.Url
+                }
+                title={item.Title ?? ""}
+                description={item.Description ?? ""}
+                timestamp={new Date(item.Created).toLocaleDateString()}
+                tags={[{ Title: `${categories} ${tags}` }]}
+              />)
+            }
+            )
             :
             <div className={styles.notFoundItems}>
               <img src={require('../../assets/no-items.png')} alt="image not found items" width={350} height={146} />

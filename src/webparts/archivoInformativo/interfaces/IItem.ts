@@ -6,6 +6,7 @@ export interface IItem {
   BannerImageUrl: BannerImageUrl;
   Description?: string;
   Created: string;
+  FileRef: string;
 }
 
 export interface Category {

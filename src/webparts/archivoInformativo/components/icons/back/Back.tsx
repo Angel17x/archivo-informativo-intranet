@@ -2,11 +2,12 @@ import * as React from 'react';
 import { Breadcrumb, BreadcrumbButton, BreadcrumbDivider, BreadcrumbItem } from "@fluentui/react-components";
 import { Arrow } from "../arrow/Arrow";
 import styles from '../../../styles/Back.module.scss';
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 
-export const Back: React.FC = () => {
+export const Back: React.FC<{ context: WebPartContext }> = ({ context }) => {
 
   const navigateToHome = (): void => {
-    // window.location.href = context.pageContext.web.absoluteUrl;
+    window.location.href = context.pageContext.web.absoluteUrl;
   }
 
   return (

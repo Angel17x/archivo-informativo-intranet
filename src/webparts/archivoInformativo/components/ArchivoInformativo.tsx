@@ -11,6 +11,7 @@ import { Drawer } from './drawer/Drawer';
 import { StateActions } from '../enums';
 import { SPHttpClient } from '@microsoft/sp-http';
 import { ICategoryItem } from '../interfaces/ICategoryItem';
+import { IItem } from '../interfaces/IItem';
 
 const initialState: IReducerState = {
   loading: false,
@@ -32,6 +33,48 @@ const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, descr
 
   const [state, dispatch] = React.useReducer(reducerDrawer, initialState);
 
+  const extractImageUrlFromCanvasContent = (canvasContent: string): string | null => {
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(canvasContent, "text/html");
+      const imageElement = doc.querySelector("img");
+      return imageElement ? imageElement.src : null;
+    } catch (error) {
+      console.error("Error parsing CanvasContent1 for image URL:", error);
+      return null;
+    }
+  };
+
+  const fetchPosts = async (selectedCategory: string): Promise<void> => {
+    dispatch({ type: StateActions.SEARCH_POSTS, payload: initialState });
+
+    const selectFields = "Title,Description,FileRef,BannerImageUrl,CanvasContent1,Estatus,Created,Noticia,Categoria/Title,Etiquetas/Title";
+    let filter = `Title ne null and FileDirRef eq '/sites/IntranetDev/SitePages' and Estatus eq 'Habilitado' and Noticia eq 'Si'`;
+
+    if (selectedCategory !== initialState.selectedCategory) {
+      filter = `Title ne null and Categoria/Title eq '${selectedCategory}' and FileDirRef eq '/sites/IntranetDev/SitePages' and Estatus eq 'Habilitado' and Noticia eq 'Si'`;
+    }
+
+    const url = `${context.pageContext.web.absoluteUrl}/_api/web/lists/getByTitle('Páginas del sitio')/items?$select=${encodeURIComponent(selectFields)}&$expand=Categoria,Etiquetas&$filter=${encodeURIComponent(filter)}`;
+
+    try {
+      const response = await context.spHttpClient.get(url, SPHttpClient.configurations.v1);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      const postsWithThumbnails = data.value.map((post: IItem) => ({
+        ...post,
+        BannerImageUrl: {
+          Url: extractImageUrlFromCanvasContent(post.CanvasContent1) || undefined
+        }
+      }));
+      dispatch({ type: StateActions.SET_POSTS, payload: postsWithThumbnails || [] });
+    } catch (error) {
+      dispatch({ type: StateActions.ERROR_POSTS, payload: error.message });
+    }
+  };
+
   const onCategoryChange = async (_: DialogOpenChangeEvent, data: { value: string }): Promise<void> => {
     dispatch({ type: StateActions.SELECT_CATEGORY, payload: data.value });
     await fetchPosts(data.value);
@@ -41,26 +84,6 @@ const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, descr
     dispatch({ type: StateActions.SELECT_CATEGORY, payload: value });
     await fetchPosts(value);
   };
-
-  const fetchPosts = async (selectedCategory: string): Promise<void> => {
-    dispatch({ type: StateActions.SEARCH_POSTS, payload: initialState });
-    const selectFields = "Title,Description,BannerImageUrl,CanvasContent1,Created,Categoria/Title,Etiquetas/Title";
-    let filter = 'Title ne null ';
-    if (selectedCategory !== initialState.selectedCategory) {
-      filter = `Title ne null and Categoria/Title eq '${selectedCategory}'`
-    }
-    const url = `${context.pageContext.web.absoluteUrl}/_api/web/lists/getByTitle('Páginas del sitio')/items?$select=${encodeURIComponent(selectFields)}&$expand=Categoria,Etiquetas&$filter=${encodeURIComponent(filter)}`;
-    try {
-      const response = await context.spHttpClient.get(url, SPHttpClient.configurations.v1);
-      const data = await response.json();
-      dispatch({ type: StateActions.SET_POSTS, payload: data.value || [] });
-    } catch (error) {
-      dispatch({ type: StateActions.ERROR_POSTS, payload: error.message });
-    }
-  };
-
-
-
 
   const fetchData = async (): Promise<void> => {
     dispatch({ type: StateActions.LOADING, payload: initialState });
@@ -89,7 +112,7 @@ const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, descr
   return (
     <FluentProvider theme={webLightTheme}>
       <div className={styles.containerRoot}>
-        <Back />
+        <Back context={context} />
         <div className={styles.containerHeader}>
           <h2>{description}</h2>
         </div>
