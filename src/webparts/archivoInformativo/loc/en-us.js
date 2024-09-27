@@ -2,6 +2,7 @@ define([], function () {
   return {
     "PropertyPaneDescription": "Panel De Configuración",
     "BasicGroupName": "Configuración - Archivo Informátivo",
+    "CategoryTitle": "Título - Categorías",
     "DescriptionFieldLabel": "Título",
     "DescriptionFieldDropdownLabel": "Categorías",
     "AppLocalEnvironmentSharePoint": "The app is running on your local environment as SharePoint web part",

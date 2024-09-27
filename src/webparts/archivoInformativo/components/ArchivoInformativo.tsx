@@ -29,7 +29,7 @@ const initialState: IReducerState = {
   selectedListId: undefined
 }
 
-const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, description, selectedListId }: IArchivoInformativoProps) => {
+const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, categoryTitle, description, selectedListId }: IArchivoInformativoProps) => {
 
   const [state, dispatch] = React.useReducer(reducerDrawer, initialState);
 
@@ -112,7 +112,9 @@ const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, descr
   return (
     <FluentProvider theme={webLightTheme}>
       <div className={styles.containerRoot}>
-        <Back context={context} />
+        <Back
+          actualPath={description}
+          context={context} />
         <div className={styles.containerHeader}>
           <h2>{description}</h2>
         </div>
@@ -122,6 +124,7 @@ const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, descr
         <div className={styles.containerBody}>
           <div className={styles.sidebar}>
             <Drawer
+              title={categoryTitle}
               state={state}
               onCategoryChange={onCategoryChange}
             />

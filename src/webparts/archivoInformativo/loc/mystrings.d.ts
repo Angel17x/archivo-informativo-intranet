@@ -1,6 +1,7 @@
 declare interface IArchivoInformativoWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
+  CategoryTitle: string;
   DescriptionFieldLabel: string;
   DescriptionFieldDropdownLabel:string;
   AppLocalEnvironmentSharePoint: string;

@@ -27,11 +27,12 @@
         "default": "Archivo Informativo"
       },
       "description": {
-        "default": "ArchivoInformativo description"
+        "default": "Archivo Informativo description"
       },
       "officeFabricIconFontName": "Page",
       "properties": {
-        "description": "ArchivoInformativo"
+        "description": "Archivo Informativo",
+        "categoryTitle": "Categorías"
       }
     }
   ]

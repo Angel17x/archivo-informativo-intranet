@@ -4,7 +4,7 @@ import { Arrow } from "../arrow/Arrow";
 import styles from '../../../styles/Back.module.scss';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 
-export const Back: React.FC<{ context: WebPartContext }> = ({ context }) => {
+export const Back: React.FC<{ context: WebPartContext, actualPath: string }> = ({ context, actualPath }) => {
 
   const navigateToHome = (): void => {
     window.location.href = context.pageContext.web.absoluteUrl;
@@ -24,7 +24,7 @@ export const Back: React.FC<{ context: WebPartContext }> = ({ context }) => {
         <BreadcrumbItem>
           <BreadcrumbButton>
             { /*context.pageContext.web.title*/}
-            Centro de comunicaciones
+            {actualPath}
           </BreadcrumbButton>
         </BreadcrumbItem>
       </Breadcrumb>

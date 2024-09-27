@@ -11,7 +11,7 @@ import {
 } from "@fluentui/react-nav-preview";
 
 
-export const Drawer: React.FC<IDrawerProps> = ({ state, onCategoryChange }) => {
+export const Drawer: React.FC<IDrawerProps> = ({ title, state, onCategoryChange }) => {
 
   return (
     <>
@@ -51,7 +51,7 @@ export const Drawer: React.FC<IDrawerProps> = ({ state, onCategoryChange }) => {
                 className={styles.navDrawer} // Aplicando estilos personalizados
               >
                 <NavDrawerBody>
-                  <AppItem as="a" className={styles.titleItem}>Categorías</AppItem>
+                  <AppItem as="a" className={styles.titleItem}>{title}</AppItem>
                   {(!state.error && state.categories.length > 0) && state.categories.map((x: ICategoryItem) => (
                     <NavItem
                       className={styles.navItem}

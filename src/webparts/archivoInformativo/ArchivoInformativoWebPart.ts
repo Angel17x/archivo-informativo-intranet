@@ -17,6 +17,7 @@ import { SPHttpClient } from '@microsoft/sp-http';
 
 export interface IArchivoInformativoWebPartProps {
   description: string;
+  categoryTitle: string;
   selectedListId?: string;
 }
 
@@ -29,6 +30,7 @@ export default class ArchivoInformativoWebPart extends BaseClientSideWebPart<IAr
       ArchivoInformativo,
       {
         description: this.properties.description,
+        categoryTitle: this.properties.categoryTitle,
         selectedListId: this.properties.selectedListId,
         context: this.context
       }
@@ -128,6 +130,13 @@ export default class ArchivoInformativoWebPart extends BaseClientSideWebPart<IAr
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                })
+              ]
+            },
+            {
+              groupFields: [
+                PropertyPaneTextField('categoryTitle', {
+                  label: strings.CategoryTitle
                 })
               ]
             },

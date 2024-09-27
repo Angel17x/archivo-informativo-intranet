@@ -38,8 +38,8 @@ export const Posts: React.FC<{ isLoading: boolean, items: IItem[] }> = ({ isLoad
           :
           !state.isLoading && items.length !== 0 ?
             items.length > 0 && items.map((item: IItem, index: number) => {
-              let categories = item.Categoria.length > 0 ? item.Categoria.map((x) => x.Title).join(' - ') : '';
-              let tags = item.Etiquetas.length > 0 ? item.Etiquetas.map((x) => x.Title).join(' - ') : '';
+              // const categories = item.Categoria.length > 0 ? item.Categoria.map((x) => x.Title).join(' - ') : '';
+              // const tags = item.Etiquetas.length > 0 ? item.Etiquetas.map((x) => x.Title).join(' - ') : '';
               return (<CardComponent
                 id={`card-${index}`}
                 fileUrl={item.FileRef}
@@ -53,7 +53,7 @@ export const Posts: React.FC<{ isLoading: boolean, items: IItem[] }> = ({ isLoad
                 title={item.Title ?? ""}
                 description={item.Description ?? ""}
                 timestamp={new Date(item.Created).toLocaleDateString()}
-                tags={[{ Title: `${categories} ${tags}` }]}
+                tags={item.Categoria}
               />)
             }
             )
