@@ -45,10 +45,7 @@ export const Posts: React.FC<{ isLoading: boolean, items: IItem[] }> = ({ isLoad
                 fileUrl={item.FileRef}
                 key={index}
                 imageUrl={
-                  item.BannerImageUrl.Url === null ||
-                    item.BannerImageUrl.Url === undefined ?
-                    require('../../assets/no-items.png') :
-                    item.BannerImageUrl.Url
+                  item.BannerImageUrl.Url
                 }
                 title={item.Title ?? ""}
                 description={item.Description ?? ""}

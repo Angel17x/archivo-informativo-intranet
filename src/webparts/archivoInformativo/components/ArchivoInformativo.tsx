@@ -12,6 +12,7 @@ import { StateActions } from '../enums';
 import { SPHttpClient } from '@microsoft/sp-http';
 import { ICategoryItem } from '../interfaces/ICategoryItem';
 import { IItem } from '../interfaces/IItem';
+import { Paginated } from './paginate/paginate';
 
 const initialState: IReducerState = {
   loading: false,
@@ -55,7 +56,7 @@ const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, categ
       filter = `Title ne null and Categoria/Title eq '${selectedCategory}' and FileDirRef eq '/sites/IntranetDev/SitePages' and Estatus eq 'Habilitado' and Noticia eq 'Si'`;
     }
 
-    const url = `${context.pageContext.web.absoluteUrl}/_api/web/lists/getByTitle('Páginas del sitio')/items?$select=${encodeURIComponent(selectFields)}&$expand=Categoria,Etiquetas&$filter=${encodeURIComponent(filter)}`;
+    const url = `${context.pageContext.web.absoluteUrl}/_api/web/lists/getByTitle('Páginas del sitio')/items?$select=${encodeURIComponent(selectFields)}&$expand=Categoria,Etiquetas&$filter=${encodeURIComponent(filter)}&$top=15&$orderby=Created desc`;
 
     try {
       const response = await context.spHttpClient.get(url, SPHttpClient.configurations.v1);
@@ -141,6 +142,8 @@ const ArchivoInformativo: React.FC<IArchivoInformativoProps> = ({ context, categ
           </div>
         </div>
       </div>
+      <Paginated itemsPerPage={15} />
+
     </FluentProvider>
   );
 }

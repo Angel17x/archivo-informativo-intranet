@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PostIcon } from '../icons/post/post';
 
 // const getMediaType = (url: string): string => {
 //   if (!url || url.trim() === '') {
@@ -18,6 +19,6 @@ export const MediaDisplay: React.FC<{ url?: string, width: number, height: numbe
 
   // const mediaType = getMediaType(url);
 
-  return <img src={url ?? require('../../assets/no-image.png')} alt="Descripción del contenido visual" width={width} height={height} style={{ maxWidth: '100%' }} />;
+  return !url || url.trim() === "" ? <PostIcon width={20} heigth={10} /> : <img src={url} alt="Descripción del contenido visual" width={width} height={height} style={{ maxWidth: '100%' }} />;
 }
 
